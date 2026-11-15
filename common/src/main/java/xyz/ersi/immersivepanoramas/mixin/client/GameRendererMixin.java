@@ -26,7 +26,7 @@ public class GameRendererMixin {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/render/GuiRenderer;render()V"))
     private void onBeforeGuiRender(CallbackInfo ci) {
-        if (this.gameRenderState.shouldRenderLevel && this.minecraft.gui.screen() instanceof PauseScreen) {
+        if (this.minecraft.isGameLoadFinished() && this.minecraft.level != null && this.minecraft.gui.screen() instanceof PauseScreen) {
             boolean isSingleplayer = this.minecraft.isLocalServer() || (this.minecraft.getSingleplayerServer() != null);
             ModConfig config = ModConfig.getInstance();
             if (config.enabled && (!isSingleplayer || config.enableSingleplayer) && config.isAllowed(this.minecraft)) {

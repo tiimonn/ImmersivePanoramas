@@ -3,12 +3,12 @@ package xyz.ersi.immersivepanoramas.client;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.renderpearl.api.buffers.GpuBuffer;
-import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
-import com.mojang.renderpearl.api.commands.CommandEncoder;
-import com.mojang.renderpearl.api.commands.GpuFence;
-import com.mojang.renderpearl.api.device.GpuDevice;
-import com.mojang.renderpearl.api.textures.GpuTexture;
+import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.blaze3d.buffers.GpuFence;
+import com.mojang.blaze3d.systems.CommandEncoder;
+import com.mojang.blaze3d.systems.GpuDevice;
+import com.mojang.blaze3d.textures.GpuTexture;
 import net.minecraft.client.Camera;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.DeltaTracker;
@@ -92,7 +92,7 @@ public class PanoramaCapture {
                     try (Gizmos.TemporaryCollection gizmos = client.levelExtractor.collectPerFrameMainThreadGizmos()) {
                         client.gameRenderer.update(DeltaTracker.ONE);
                         client.gameRenderer.extract(DeltaTracker.ONE, true);
-                        client.gameRenderer.renderLevel();
+                        client.gameRenderer.renderLevel(DeltaTracker.ONE);
                     }
 
                     final int faceIndex = i;
